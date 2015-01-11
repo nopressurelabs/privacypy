@@ -25,7 +25,7 @@ def map_keywords_to_wikipedia_categories(keywords):
     return profile
 
 def extract_params_from_url(ads):
-    ads_profile = Counter()
+    ads_profile = list()
     for ad in ads:
         serp_url = ad
         ads_profile.extend([get_all_query_params()])

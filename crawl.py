@@ -148,7 +148,7 @@ def visit_list(url_list, driver, ads, keywords):
             profile = mapping.map_keywords_to_wikipedia_categories(keywords)
         if len(ads) > 0:
             ads_tags = list()
-            ads_tags = mapping.extract_params_from_url(ads)
+            ads_tags.extend(mapping.extract_params_from_url(ads))
             ads_profile = mapping.map_keywords_to_wikipedia_categories(ads_tags)
         if len(ads)>0 and len(keywords)>0:
             mapping.create_bar_chart(profile, ads_profile)
@@ -172,8 +172,7 @@ def visit_list(url_list, driver, ads, keywords):
                 if len(keywords) > 0:
                     profile = mapping.map_keywords_to_wikipedia_categories(keywords)
                 if len(ads) > 0:
-                    ads_tags = list()
-                    ads_tags = mapping.extract_params_from_url(ads)
+                    ads_tags.extend(mapping.extract_params_from_url(ads))
                     ads_profile = mapping.map_keywords_to_wikipedia_categories(ads_tags)
                 if len(ads)>0 and len(keywords)>0:
                     mapping.create_bar_chart(profile, ads_profile)
