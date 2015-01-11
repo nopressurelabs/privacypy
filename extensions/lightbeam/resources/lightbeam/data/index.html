@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Lightbeam</title>
+    <link rel="stylesheet" type="text/css" href="OpenSans.css" />
+    <link rel="stylesheet" type="text/css" href="font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="shortcut icon" type="image/png" href="icons/lightbeam_logo-only_32x32.png">
+</head>
+<body role="application">
+    <div class="main">
+        <aside class="controls" role="navigation">
+            <header>
+                <img class="logo" src="icons/lightbeam_150x45.png" />
+            </header>
+
+            <div class="section-header all-cap-header">VISUALIZATION</div>
+            <div class="btn_group visualization" role="menu">
+                <div data-list class="dropdown_options">
+                    <a data-value="Graph" role="menuitem" tabIndex="1" aria-label="Graph Visualization">
+                        <img src="image/lightbeam_icon_graph.png" />graph
+                    </a>
+                    <a data-value="List" role="menuitem" tabIndex="2" aria-label="List. Display data in tabular format.">
+                        <img src="image/lightbeam_icon_list.png" />list
+                    </a>
+                </div>
+            </div>
+            <div class="section-header all-cap-header">DATA</div>
+            <div class="btn">
+                <a class="download">
+                    <img src="image/lightbeam_icon_download2.png" />Save Data
+                </a>
+            </div>
+            <div class="btn">
+                <a class="reset-data">
+                    <img src="image/lightbeam_icon_reset.png" />Reset Data
+                </a>
+            </div>
+            <div class="links">
+                <img src="image/lightbeam_icon_feedback.png"> <a href="mailto:lightbeam-feedback@mozilla.org">Give Us Feedback</a><br />
+                <a href="http://www.mozilla.org/lightbeam" target="_blank">mozilla.org/lightbeam</a>
+            </div>
+        </aside>
+
+        <div class="content-flex">
+            <div class="top-bar">
+                <div class="stats-section">
+                    <section>
+                        <div class="all-cap-header">DATA GATHERED SINCE</div>
+                        <div class="stat date-gathered large-header"></div>
+                    </section>
+                    <section>
+                        <div class="all-cap-header">YOU HAVE VISITED</div>
+                        <div class="stat first-party-sites large-header"></div>
+                    </section>
+                    <section>
+                        <div class="all-cap-header">YOU HAVE CONNECTED WITH</div>
+                        <div class="stat third-party-sites large-header"></div>
+                    </section>
+                </div>
+                <div class="sharing-section">
+                    <div class="label all-cap-header">CONTRIBUTE DATA</div>
+                    <div class="toggle-btn share-btn">
+                        <label><input type="checkbox" name="" id="" />
+                            <div class="toggle-btn-innner">
+                                <div class="switch"></div>
+                                <div class="on-off-text">OFF</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        <div id="content">
+            <aside class="info">
+                <div class="holder">
+                <!-- Site Profile starts ================================= -->
+                    <div class="site-profile-content hidden">
+                        <div>
+                            <header class="title large-header"></header>
+                            <!--span class="blue-text">You are currently browsing this site</span-->
+                            <span class="all-cap-header"><b>First Access </b></span><span class="info-first-access">Date</span><br/>
+                            <span class="all-cap-header"><b>Last Access </b></span><span class="info-last-access">Date</span>
+                            <div class="pref-tag hidden">
+                                <br/>
+                                <img src="" />
+                                This site is currently
+                                <b><span></span></b>.
+                                <br/>
+                            </div>
+                            <div class="pref-action">
+                                <br/>
+                                <div class="btn">
+                                    <a class="unblock hidden">
+                                        <img src="icons/lightbeam_icon_unblock.png" />Unblock Site
+                                    </a>
+                                    <a class="block">
+                                        <img src="icons/lightbeam_icon_block.png" />Block Site
+                                    </a>
+                                </div>
+                            </div>
+                        <div class="map-section">
+                            <header class="blue-text large-header">Server Location</header>
+                            <div><span id="country">&nbsp;</span></div>
+                            <!-- SVG world map code starts; based on BlankMap-World6,_compact.svg by Canuckguy et al. =========================  -->
+                            <object type="image/svg+xml" data="map.svg" class="world-map"></object>
+                        </div>
+                        </div>
+                        <div class="connections-list">
+                            <header class="large-header">
+                                Connected to <b class="num-connected-sites"></b> since first access.
+                            </header>
+                            <ul>
+                            </ul>
+                        </div>
+                    </div>
+                <!-- Site Profile ends ================================= -->
+                <!-- Help Sections starts ================================= -->
+                    <div class="help-content">
+                    <!-- Graph View Help -->
+                        <div class="graph-view-help hidden">
+                            <header class="large-header"><img src="image/lightbeam_icon_help.png" /> Visualization Help</header>
+                            <div>
+                                <div class="grey-label all-cap-header">Visualization</div> Graph View<br />
+                                <div class="grey-label all-cap-header">Best for</div> Seeing site relationships<br />
+                            </div>
+                            <section>
+                                <div class="blue-text all-cap-header">DESCRIPTION</div>
+                                <p>
+                                    In this Graph visualization, <svg class="legend-canvas-small" version="1.1" xmlns="http://www.w3.org/2000/svg"><circle class="visitedSites" cx="8" cy="8" r="6" /></svg> <b>circular nodes</b> are websites you have visited and <svg class="legend-canvas-small" version="1.1" xmlns="http://www.w3.org/2000/svg"><polygon class="unvisitedSites" points="0,14 7,2 14,14" /></svg> <b>triangular nodes</b> are third party sites.  Over time, this graph will become a network of <svg class="legend-canvas-small" version="1.1" xmlns="http://www.w3.org/2000/svg"><line class="connectionLine" x1="14" y1="2" x2="2" y2="14" /></svg> <b>connections</b> and nodes to visualize your activity on the web.
+                                </p>
+                                <p>
+                                    This graph may get complex quickly; to reduce the amount of information displayed, use <b>FILTERS</b> to help focus on a set of data.
+                                </p>
+                            </section>
+                            <section>
+                                <div class="blue-text all-cap-header">Features</div>
+                                <div>
+                                    <div><span class="feature-name">Zoom In + Out</span> - on scroll</div>
+                                    <div><span class="feature-name">Pan</span> - on click + drag</div>
+                                    <div><span class="feature-name">Tooltips</span> - on hover</div>
+                                    <div><span class="feature-name">Website Profile</span> - on click</div>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="blue-text all-cap-header">Legends and Controls</div>
+                                <p>
+                                    These buttons serve as toggles to help <u>identify</u> various elements on the graph.
+                                </p>
+                                <p>
+                                    <ul>
+                                        <li><svg class="legend-canvas-small" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                        <line class="cookies" x1="14" y1="2" x2="2" y2="14" />
+                                    </svg> <span class="cookie-text"><b>Cookies</b></span> identify when a site has stored some data in your browser.</li>
+                                    </ul><br/>
+                                    When you set your site preferences:
+                                    <ul>
+                                        <li><img src="icons/lightbeam_icon_block.png" /><span class="block-text">Block</span>  means they are blocked from connecting to your browser.</li>
+                                        <li><img src="icons/lightbeam_icon_watch.png" /><span class="watch-text">Watch</span>  means they are highlighted.</li>
+                                    </ul>
+                                    These preferences can be set in the List Visualization.
+                                </p>
+                            </section>
+                        </div>
+                    <!-- List View Help -->
+                        <div class="list-view-help hidden">
+                            <header class="large-header"><img src="image/lightbeam_icon_help.png" /> Visualization Help</header>
+                            <div>
+                                <div class="grey-label all-cap-header">Visualization</div> List View<br />
+                                <div class="grey-label all-cap-header">Best for</div> Seeing a text database<br />
+                            </div>
+                            <section>
+                                <div class="blue-text all-cap-header">Description</div>
+                                <p>
+                                    In this list Visualization, you can see a list of all websites you have visited and sites you have not visited but still connect to you.  This view assists with sorting and filtering large numbers of sites.
+                                </p>
+                            </section>
+                            <section>
+                                <div class="blue-text all-cap-header">Features</div>
+                                <div>
+                                    <div><span class="feature-name"><img src="image/lightbeam_icon_checkbox.png" />  Checkboxes</span> - click + apply site preference</div>
+                                    <div><span class="feature-name"><img src="image/lightbeam_icon_sortby.png" /> Sort By</span> - click column heading to sort by Type, Preference, Website(A-Z), Date, Sites Connected</div>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="blue-text all-cap-header">Legends and Controls</div>
+                                <p>
+                                    These buttons <u>apply actions</u> to specific sites.
+                                </p>
+                                <p>
+                                    When you set your site preferences:
+                                    <ul>
+                                        <li><img src="icons/lightbeam_icon_block.png" /><span class="block-text">Block</span>  means sites are blocked from connecting to your browser.</li>
+                                        <li><img src="icons/lightbeam_icon_hide.png" /><span class="hide-text">Hide</span>  means sites are not seen in the visualization.</li>
+                                        <li><img src="icons/lightbeam_icon_watch.png" /><span class="watch-text">Watch</span>  means sites are highlighted.</li>
+                                    </ul>
+                                </p>
+                            </section>
+                        </div>
+                    </div>
+                <!-- Help Sections ends ================================= -->
+                <!-- About Section starts ================================= -->
+                    <div class="about-content">
+                        <div class="graph-view-help">
+                            <header class="large-header"><img src="image/lightbeam_icon_about.png" /> About Lightbeam</header>
+                            <div>
+                                <div class="grey-label all-cap-header">Version</div> <span id="version-number"></span><br />
+                                <div class="grey-label all-cap-header">By</div> Mozilla Foundation<br />
+                            </div>
+                            <section>
+                                <div class="blue-text all-cap-header">About this Add-on</div>
+                                <p>
+                                    Using interactive visualizations, Lightbeam allows you to see the first and third party sites you interact with on the Web. As you browse, Lightbeam reveals the full depth of the Web today, including parts that are not transparent to the average user. Using three distinct interactive graphic representations — Graph, Clock and List — Lightbeam enables you to examine individual third parties over time and space, identify where they connect to your online activity and provides ways for you to engage with this unique view of the Web.
+                                </p>
+                                <p>
+                                    Mozilla partnered with the Social + Interactive Media (SIM) Centre at Emily Carr University of Art + Design to produce the aesthetic and functional data visualizations for Lightbeam.  To read more about the collaboration please visit: <a href="http://www.simcentre.ca/">http://www.simcentre.ca/</a>.
+                                </p>
+                            </section>
+                            <section>
+                                <div class="blue-text all-cap-header">Lightbeam Privacy Notice</div>
+                                <p>
+                                    We care about your privacy. Lightbeam is a browser add-on that collects and helps you visualize third party requests on any site you visit. If you choose to send Lightbeam data to Mozilla (that’s us), our <a href="#mozillaprivacypolicy">privacy policy</a> describes how we handle that data.
+                                </p>
+                                <div class="blue-text all-cap-header">Things you should know</div>
+                                <ul class="bullet-form">
+                                    <li>
+                                        After you install Lightbeam, the add-on collects data to help you visualize third party requests when you visit sites.
+                                        <ul>
+                                            <li>When you visit a site and that site contacts a third party, Lightbeam collects the following type of data: Domains of the visited sites and third parties, the existence of cookies, and a rough timestamp of when the site was visited. To see a complete list, please visit <a href="https://github.com/mozilla/lightbeam/blob/master/doc/data_format.v1.1.md">here.</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        By default, data collected by Lightbeam remains in your browser and is not sent to us.
+                                    </li>
+                                    <li>
+                                        You can choose to contribute your Lightbeam data to us. Data from Lightbeam can help us and others to understand third party relationships on the web and promote further research in the field of online tracking and privacy.
+                                        <ul>
+                                            <li>If you do contribute Lightbeam data to us, your browser will send us your Lightbeam data (you can see a list of the kind of data involved <a href="https://github.com/mozilla/lightbeam/blob/master/doc/data_format.v1.1.md">here.</a>).
+ We will post your data along with data from others in an aggregated and open database in a manner which we believe minimizes your risk of being re-identified. Opening this data can help users and researchers make more informed decisions based on the collective information.
+                                            </li>
+                                            <li>
+                                                Clicking "Reset data" at any time will delete the data stored locally in your browser.
+                                            </li>
+                                            <li>
+                                                Uninstalling Lightbeam prevents collection of any further Lightbeam data.
+                                            </li>
+                                         </ul>
+                                    </li>
+                                </ul>
+                            </section>
+                            <section>
+                                <div class="blue-text all-cap-header" id="mozillaprivacypolicy">Mozilla Privacy Policy &ndash; Learn More</div>
+                                <div class="privacy-policy">
+                                        <header><b>Lightbeam Privacy</b></header>
+                                        <p>Your privacy is an important factor that Mozilla (that's us) considers in the development of each of our products and services. We are committed to being transparent and open and want you to know how we receive information about you, and what we do with that information once we have it.</p>
+                                    <header><b>What do we mean by "personal information?"</b></header>
+                                    <p>
+                                        For us, "personal information" means information which identifies you, like your name or email address.
+                                    </p>
+                                    <p>
+                                        Any information that falls outside of this is "non-personal information."
+                                    </p>
+                                    <p>
+                                        If we store your personal information with information that is  non-personal, we will consider the combination as personal information.  If we remove all personal information from a set of data then the  remaining is non-personal information.
+                                    </p>
+                                        <header><b>How do we learn information about you?
+                                        </b></header>
+                                        <p>
+                                            We learn information about you when:
+                                        </p>
+                                        <ul>
+                                            <li>
+                                                you give it to us directly (e.g., when you choose to send us crash reports from Firefox); we collect it automatically through our products and services  (e.g., when we check whether your version of Firefox is up to date);
+                                            </li>
+                                            <li>
+                                                we collect it automatically through our products and services  (e.g., when we check whether your version of Firefox is up to date);
+                                            </li>
+                                            <li>
+                                                someone else tells us information about you (e.g., Thunderbird works with your email providers to set up your account); or
+                                            </li>
+                                            <li>
+                                                when we try and understand more about you based on information  you've given to us (e.g., when we use your IP address to customize  language for some of our services).
+                                            </li>
+                                        </ul>
+                                        <br/><header><b>What do we do with your information once we have it?
+                                        </b></header>
+                                        <p>When you give us personal information, we will use it in the ways for  which you've given us permission. Generally, we use your information to help us provide and improve our products and services for you.</p>
+                                        <header><b>When do we share your information with others?</b></header>
+                                        <ul>
+                                            <li>When we have gotten your permission to share it.</li>
+                                            <li>For processing or providing products and services to you, but only  if those entities receiving your information are contractually  obligated to handle the data in ways that are approved by Mozilla.</li>
+                                            <li>When we are fulfilling our <a href="https://www.mozilla.org/en-US/about/manifesto/">mission of being open</a>.  We sometimes release information to make our products better and foster  an open web, but when we do so, we will remove your personal  information and try to disclose it in a way that minimizes the risk of  you being re-identified.</li>
+                                            <li>When the law requires it. We follow the law whenever we receive  requests about you from a government or related to a lawsuit. We'll  notify you when we're asked to hand over your personal information in  this way unless we're legally prohibited from doing so. When we receive  requests like this, we'll only release your personal information if we  have a good faith belief that the law requires us to do so. Nothing in  this policy is intended to limit any legal defenses or objections that  you may have to a third party's request to disclose your information.</li>
+                                            <li>When we believe it is necessary to prevent harm to you or someone  else. We will only share your information in this way if we have a good  faith belief that it is reasonably necessary to protect the rights,  property or safety of you, our other users, Mozilla or the public.</li>
+                                            <li>If our organizational structure or status changes (if we undergo a  restructuring, are acquired, or go bankrupt) we may pass your  information to a successor or affiliate.</li><br/>
+                                        </ul>
+                                        <header><b>How do we store and protect your personal information?
+                                        </b></header>
+                                       <p> We are committed to protecting your personal information once we have  it. We implement physical, business and technical security measures. Despite our efforts, if we learn of a security breach, we'll notify you  so that you can take appropriate protective steps.</p>
+                                       <p>We also don't want your personal information for any longer than we  need it, so we only keep it long enough to do what we collected it for.  Once we don't need it, we take steps to destroy it unless we are  required by law to keep it longer.</p>
+                                       <header><b>What else do we want you know?
+                                        </b></header>
+                                       <p>We're a global organization and our computers are in several  different places around the world. We also use service providers whose  computers may also be in various countries. This means that your  information might end up on one of those computers in another country,  and that country may have a different level of data protection regulation than yours. By giving us information, you consent to this  kind of transfer of your information. No matter what country your  information is in, we comply with applicable law and will also abide by  the commitments we make in this privacy policy.<p>
+
+                                        <p>If you are under 13, we don't want your personal information, and you  must not provide it to us. If you are a parent and believe that your  child who is under 13 has provided us with personal information, please contact us at <a href="mailto:lightbeam-privacy@mozilla.org">lightbeam-privacy@mozilla.org</a> to have your child's information removed.</p>
+                                        <header><b>What if we change this policy?
+                                        </b></header>
+                                        <p>
+                                            We may need to change this policy and when we do, we'll notify you.
+                                        </p>
+                                </div>
+                                <!-- Lightbeam Privacy Policy ends -->
+                            </section>
+                            <section>
+                                <div class="blue-text all-cap-header">Contact</div>
+                                <p>
+                                    IRC channel is #lightbeam on irc.mozilla.org. <br/>
+                                    GitHub: <a href="https://github.com/mozilla/lightbeam" target="_blank">https://github.com/mozilla/lightbeam</a>
+                                </p>
+                            </section>
+                        </div>
+                    </div>
+                <!-- About Section starts ================================= -->
+                </div>
+            </aside>
+            <div class="info-panel-controls">
+                <ul>
+                    <li class="toggle-site-profile disabled"><img src="image/lightbeam_icon_website.png" /><i class="icon-chevron-right hidden"></i></li>
+                    <li class="toggle-help"><a class="help"><img src="image/lightbeam_icon_help.png" /><i class="icon-chevron-right hidden"></i></a></li>
+                    <li class="toggle-about"><a class="about"><img src="image/lightbeam_icon_about.png" /></a><i class="icon-chevron-right hidden"></i></li>
+                </ul>
+            </div>
+            <div class="stage-stack" role="main">
+              <div class="stage">
+                    <div class="filter-display hidden">
+                        <header></header>
+                        <div class="blue-text all-cap-header">Graph View</div>
+                    </div>
+                  <svg class="vizcanvas" width="100%" height="100%" viewBox="-350 -450 700 500">
+                      <defs>
+                        <radialGradient fy="50%" fx="50%" r="50%" cy="50%" cx="50%" id="selected-glow">
+                            <stop style="stop-color:rgb(255,255,255);stop-opacity:1" offset="0%"></stop>
+                            <stop style="stop-color:rgb(0,0,0);stop-opacity:0" offset="100%"></stop>
+                        </radialGradient>
+                        <radialGradient fy="50%" fx="50%" r="50%" cy="50%" cx="50%" id="connected-glow">
+                            <stop style="stop-color:#73A4B8;stop-opacity:1" offset="0%"></stop>
+                            <stop style="stop-color:#73A4B8;stop-opacity:0.5" offset="40%"></stop>
+                            <stop style="stop-color:rgb(0,0,0);stop-opacity:0" offset="100%"></stop>
+                        </radialGradient>
+                      </defs>
+                  </svg>
+              </div><!-- .stage -->
+              <!-- LEGEND & CONTROLS for Graph ================================  -->
+              <div class="graph-footer hidden">
+                    <section class="legend-header">
+                        <div><header class="blue-text all-cap-header">TOGGLE CONTROLS</header></div>
+                        <div>
+                            <span class="blue-text all-cap-header">Filter</span>
+                            <a class="legend-toggle blue-text">Hide</a>
+                        </div>
+                    </section>
+                    <section class="legend-controls">
+                        <section class="column">
+                            <div class="btn legend-toggle-visited active">
+                                <a>
+                                    <svg class="legend-canvas-small" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                        <circle class="visitedSites" cx="8" cy="8" r="6" />
+                                    </svg>
+                                    Visited Sites
+                                </a>
+                            </div>
+                            <div class="btn legend-toggle-never-visited active">
+                                <a>
+                                    <svg class="legend-canvas-small" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                        <polygon class="unvisitedSites" points="0,14 7,2 14,14" />
+                                    </svg>
+                                    Third Party Sites
+                                </a>
+                            </div>
+                            <div class="btn legend-toggle-connections active">
+                                <a>
+                                    <svg class="legend-canvas-small" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                        <line class="connectionLine" x1="14" y1="2" x2="2" y2="14" />
+                                    </svg>
+                                    Connections
+                                </a>
+                            </div>
+                        </section>
+                        <section class="column">
+                            <div class="btn legend-toggle-watched active">
+                                <a>
+                                    <svg class="legend-canvas-large" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                        <circle class="watchedSites" cx="8" cy="8" r="6" />
+                                        <polygon class="watchedSites" points="18,14 25,2 32,14" />
+                                    </svg>
+                                    Watched Sites
+                                </a>
+                            </div>
+                            <div class="btn legend-toggle-blocked active">
+                                <a>
+                                    <svg class="legend-canvas-large" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                        <circle class="blockedSites" cx="8" cy="8" r="6" />
+                                        <line class="blockedSites" x1="11" y1="3" x2="4.5" y2="14" />
+                                        <polygon class="blockedSites" points="18,14 25,2 32,14" />
+                                        <line class="blockedSites" x1="27.5" y1="4.5" x2="23" y2="14" />
+                                    </svg>
+                                    Blocked Sites
+                                </a>
+                            </div>
+                        </section>
+                        <section class="column">
+                            <div class="btn legend-toggle-cookies active">
+                                <a>
+                                    <svg class="legend-canvas-small" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                        <line class="cookies" x1="14" y1="2" x2="2" y2="14" />
+                                    </svg>
+                                    Cookies
+                                </a>
+                            </div>
+                        </section>
+                        <div class="btn_group session">
+                            <div data-list class="dropdown_options align-right">
+                                <a data-value="recent">recent site</a>
+                                <a data-value="last10sites">last 10 sites</a>
+                                <a data-value="daily">daily</a>
+                                <a data-value="weekly">weekly</a>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+              <!-- SITE PREFERENCES for List ================================  -->
+              <div class="list-footer">
+                    <section class="legend-header">
+                        <div><header class="blue-text all-cap-header">SITE PREFERENCES</header></div>
+                        <div><a class="legend-toggle blue-text">Hide</a></div>
+                    </section>
+                    <section class="legend-controls">
+                        <section class="align-left">
+                            <input id="block-pref" type="radio" name="pref-options" value="" >
+                               <label for="block-pref" class="btn disabled">
+                                    <div class="radio-dot"></div>
+                                    <img src="icons/lightbeam_icon_block.png" />
+                                    Block Site
+                                </label>
+                            <input id="hide-pref" type="radio" name="pref-options" value="">
+                                <label for="hide-pref" class="btn disabled">
+                                    <div class="radio-dot"></div>
+                                    <img src="icons/lightbeam_icon_hide.png" />
+                                    Hide Site
+                                </label>
+                            <input id="watch-pref" type="radio" name="pref-options" value="">
+                               <label for="watch-pref" class="btn disabled">
+                                    <div class="radio-dot"></div>
+                                    <img src="icons/lightbeam_icon_watch.png" />
+                                    Watch Site
+                               </label>
+                            <input id="no-pref" type="radio" name="pref-options" value="">
+                               <label for="no-pref" class="btn disabled">
+                                    <div class="radio-dot"></div>
+                                    Clear Preference
+                               </label>
+                        </section>
+                        <section class="align-right">
+                            <div class="toggle-hidden btn">
+                                <a>
+                                    Hide Hidden Sites
+                                </a>
+                            </div>
+                        </section>
+                    </section>
+              </div>
+            </div><!-- .stage-stack -->
+        </div>
+    </div>
+    </div>
+    <div id="tooltip"></div>
+
+</body>
+</html>

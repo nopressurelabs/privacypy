@@ -1,0 +1,235 @@
+{
+ "check_memory": false, 
+ "enable_e10s": false, 
+ "is-sdk-bundled": false, 
+ "jetpackID": "jid1-F9UJ2thwoAm5gQ@jetpack", 
+ "loader": "addon-sdk/lib/sdk/loader/cuddlefish.js", 
+ "main": "main", 
+ "mainPath": "lightbeam/main", 
+ "manifest": {
+  "lightbeam/connection": {
+   "docsSHA256": null, 
+   "jsSHA256": "7886c027d302e70900886e9eb4c2c142745fc890163c23535a2db29e376e2ba3", 
+   "moduleName": "connection", 
+   "packageName": "lightbeam", 
+   "requirements": {
+    "./persist": "lightbeam/persist", 
+    "./tab/utils": "lightbeam/tab/utils", 
+    "chrome": "chrome", 
+    "sdk/event/core": "sdk/event/core", 
+    "sdk/request": "sdk/request", 
+    "sdk/self": "sdk/self", 
+    "sdk/simple-storage": "sdk/simple-storage", 
+    "sdk/timers": "sdk/timers"
+   }, 
+   "sectionName": "lib"
+  }, 
+  "lightbeam/main": {
+   "docsSHA256": "efe0e4fb21cb5cda6cf17034aabd42097260ba5dac2083d1160e12dcde488f5f", 
+   "jsSHA256": "e1a65f7be45e2e6bd828c384845d4f2641df579525192b2f36e4361b54d731fd", 
+   "moduleName": "main", 
+   "packageName": "lightbeam", 
+   "requirements": {
+    "./connection": "lightbeam/connection", 
+    "./persist": "lightbeam/persist", 
+    "./tab/events": "lightbeam/tab/events", 
+    "./ui": "lightbeam/ui", 
+    "sdk/page-mod": "sdk/page-mod", 
+    "sdk/self": "sdk/self", 
+    "sdk/system/events": "sdk/system/events", 
+    "sdk/tabs": "sdk/tabs"
+   }, 
+   "sectionName": "lib"
+  }, 
+  "lightbeam/persist": {
+   "docsSHA256": null, 
+   "jsSHA256": "71dba92441163aa9577934ce83d947fdb80603510ff78f8b6fec843cd83ffcec", 
+   "moduleName": "persist", 
+   "packageName": "lightbeam", 
+   "requirements": {
+    "chrome": "chrome", 
+    "sdk/preferences/service": "sdk/preferences/service", 
+    "sdk/request": "sdk/request", 
+    "sdk/simple-prefs": "sdk/simple-prefs", 
+    "sdk/simple-storage": "sdk/simple-storage", 
+    "sdk/system/xul-app": "sdk/system/xul-app"
+   }, 
+   "sectionName": "lib"
+  }, 
+  "lightbeam/shared/menuitems": {
+   "docsSHA256": null, 
+   "jsSHA256": "0439dfbb105ef83c0f57d55519946079bf4b9b24691d825b76de4994ba13ab81", 
+   "moduleName": "shared/menuitems", 
+   "packageName": "lightbeam", 
+   "requirements": {
+    "./unload+": "lightbeam/shared/unload+", 
+    "sdk/core/heritage": "sdk/core/heritage", 
+    "sdk/core/namespace": "sdk/core/namespace", 
+    "sdk/deprecated/api-utils": "sdk/deprecated/api-utils", 
+    "sdk/deprecated/window-utils": "sdk/deprecated/window-utils", 
+    "sdk/event/core": "sdk/event/core", 
+    "sdk/event/target": "sdk/event/target", 
+    "sdk/window/utils": "sdk/window/utils"
+   }, 
+   "sectionName": "lib"
+  }, 
+  "lightbeam/shared/policy": {
+   "docsSHA256": null, 
+   "jsSHA256": "0ffd8914168d64cc4f6ce2779e671069e34d0fc5ae4d82d2206d3fb9b52088d0", 
+   "moduleName": "shared/policy", 
+   "packageName": "lightbeam", 
+   "requirements": {
+    "chrome": "chrome", 
+    "sdk/core/heritage": "sdk/core/heritage", 
+    "sdk/core/namespace": "sdk/core/namespace", 
+    "sdk/deprecated/api-utils": "sdk/deprecated/api-utils", 
+    "sdk/platform/xpcom": "sdk/platform/xpcom", 
+    "sdk/self": "sdk/self", 
+    "sdk/system/unload": "sdk/system/unload"
+   }, 
+   "sectionName": "lib"
+  }, 
+  "lightbeam/shared/unload+": {
+   "docsSHA256": null, 
+   "jsSHA256": "6e36c26b2cfbdf4dba923c7e7a384645487e9b435b6cd2ae61e2f91b0f90f789", 
+   "moduleName": "shared/unload+", 
+   "packageName": "lightbeam", 
+   "requirements": {
+    "sdk/core/heritage": "sdk/core/heritage", 
+    "sdk/core/namespace": "sdk/core/namespace", 
+    "sdk/system/unload": "sdk/system/unload"
+   }, 
+   "sectionName": "lib"
+  }, 
+  "lightbeam/tab/events": {
+   "docsSHA256": null, 
+   "jsSHA256": "7ac2b53840fa6075c83a66e5e45632df94b0adcba912dd107366164589ab2bfe", 
+   "moduleName": "tab/events", 
+   "packageName": "lightbeam", 
+   "requirements": {
+    "./utils": "lightbeam/tab/utils", 
+    "sdk/tabs": "sdk/tabs"
+   }, 
+   "sectionName": "lib"
+  }, 
+  "lightbeam/tab/utils": {
+   "docsSHA256": null, 
+   "jsSHA256": "926f08f5219618c18b763cf3e16364481c6ef33a30510618d412cb1916b54478", 
+   "moduleName": "tab/utils", 
+   "packageName": "lightbeam", 
+   "requirements": {
+    "chrome": "chrome", 
+    "sdk/tabs": "sdk/tabs", 
+    "sdk/tabs/utils": "sdk/tabs/utils", 
+    "sdk/window/utils": "sdk/window/utils"
+   }, 
+   "sectionName": "lib"
+  }, 
+  "lightbeam/ui": {
+   "docsSHA256": null, 
+   "jsSHA256": "7dabed2a1510a9b5b5e5cbb11859618aa5107cc3d93a5be4199c91d8ec4aeb5b", 
+   "moduleName": "ui", 
+   "packageName": "lightbeam", 
+   "requirements": {
+    "./connection": "lightbeam/connection", 
+    "./persist": "lightbeam/persist", 
+    "sdk/event/core": "sdk/event/core", 
+    "sdk/private-browsing": "sdk/private-browsing", 
+    "sdk/self": "sdk/self", 
+    "sdk/simple-prefs": "sdk/simple-prefs", 
+    "sdk/simple-storage": "sdk/simple-storage", 
+    "sdk/system/xul-app": "sdk/system/xul-app", 
+    "sdk/tabs": "sdk/tabs", 
+    "sdk/ui/button/action": "sdk/ui/button/action", 
+    "sdk/widget": "sdk/widget", 
+    "shared/menuitems": "lightbeam/shared/menuitems", 
+    "shared/policy": "lightbeam/shared/policy"
+   }, 
+   "sectionName": "lib"
+  }
+ }, 
+ "metadata": {
+  "addon-sdk": {
+   "description": "Add-on development made easy.", 
+   "keywords": [
+    "javascript", 
+    "engine", 
+    "addon", 
+    "extension", 
+    "xulrunner", 
+    "firefox", 
+    "browser"
+   ], 
+   "license": "MPL 2.0", 
+   "name": "addon-sdk"
+  }, 
+  "lightbeam": {
+   "author": "Mozilla Foundation", 
+   "description": "Lightbeam is a Firefox add-on that allows you to see the third parties that are collecting information about your browsing activity, with and without your consent. Using interactive visualizations, Lightbeam shows you the relationships between these third parties and the sites you visit.", 
+   "license": "MPL 2.0", 
+   "main": "main", 
+   "name": "lightbeam", 
+   "permissions": {
+    "private-browsing": true
+   }, 
+   "version": "1.0.10.2"
+  }
+ }, 
+ "name": "lightbeam", 
+ "parseable": false, 
+ "preferences": [
+  {
+   "description": "Contribute your Lightbeam data to Mozilla", 
+   "name": "contributeData", 
+   "title": "Contribute data", 
+   "type": "bool", 
+   "value": false
+  }, 
+  {
+   "description": "Graph or list", 
+   "name": "defaultVisualization", 
+   "options": [
+    {
+     "label": "Graph", 
+     "value": "graph"
+    }, 
+    {
+     "label": "List", 
+     "value": "list"
+    }
+   ], 
+   "title": "Default visualization", 
+   "type": "menulist", 
+   "value": "graph"
+  }, 
+  {
+   "description": "Time period", 
+   "name": "defaultFilter", 
+   "options": [
+    {
+     "label": "Daily", 
+     "value": "daily"
+    }, 
+    {
+     "label": "Weekly", 
+     "value": "weekly"
+    }, 
+    {
+     "label": "Recent", 
+     "value": "recent"
+    }, 
+    {
+     "label": "Last 10 sites", 
+     "value": "last10sites"
+    }
+   ], 
+   "title": "Default filter", 
+   "type": "menulist", 
+   "value": "daily"
+  }
+ ], 
+ "preferencesBranch": "jid1-F9UJ2thwoAm5gQ@jetpack", 
+ "sdkVersion": "1.16", 
+ "staticArgs": {}, 
+ "verbose": false
+}

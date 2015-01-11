@@ -52,3 +52,9 @@ docs/_build/
 
 # PyBuilder
 target/
+
+.DS_Store
+behavioural_tracking.ipynb
+*.pyc
+.ipynb_checkpoints
+session*

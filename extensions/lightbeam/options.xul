@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<vbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <setting data-jetpack-id="jid1-F9UJ2thwoAm5gQ@jetpack" pref="extensions.jid1-F9UJ2thwoAm5gQ@jetpack.contributeData" pref-name="contributeData" title="Contribute data" type="bool">Contribute your Lightbeam data to Mozilla</setting>
+  <setting data-jetpack-id="jid1-F9UJ2thwoAm5gQ@jetpack" pref="extensions.jid1-F9UJ2thwoAm5gQ@jetpack.defaultVisualization" pref-name="defaultVisualization" title="Default visualization" type="menulist">
+    Graph or list
+    <menulist>
+      <menupopup>
+        <menuitem label="Graph" value="graph"/>
+        <menuitem label="List" value="list"/>
+      </menupopup>
+    </menulist>
+  </setting>
+  <setting data-jetpack-id="jid1-F9UJ2thwoAm5gQ@jetpack" pref="extensions.jid1-F9UJ2thwoAm5gQ@jetpack.defaultFilter" pref-name="defaultFilter" title="Default filter" type="menulist">
+    Time period
+    <menulist>
+      <menupopup>
+        <menuitem label="Daily" value="daily"/>
+        <menuitem label="Weekly" value="weekly"/>
+        <menuitem label="Recent" value="recent"/>
+        <menuitem label="Last 10 sites" value="last10sites"/>
+      </menupopup>
+    </menulist>
+  </setting>
+</vbox>
