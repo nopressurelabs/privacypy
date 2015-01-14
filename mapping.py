@@ -24,6 +24,9 @@ def map_keywords_to_wikipedia_categories(keywords):
                 'Not Found, do nothing'
     return profile
 
+def map_keywords_to_dmoz(keywords):
+    
+
 def extract_params_from_url(ads):
     ads_profile = list()
     for ad in ads:
@@ -34,21 +37,21 @@ def extract_params_from_url(ads):
 def sort_dict(x, n):
     return Counter(dict(x.most_common(n)))
 
-def create_bar_chart(profile, ads_profile):
+def create_bar_chart(profile, ads_profile, n_categories):
 
-    profile = sort_dict(profile, 3)
+    profile = sort_dict(profile, n_categories)
     print profile
 
     means_profile = profile.values()
     std_profile = profile.keys()
 
-    ads_profile = sort_dict(ads_profile, 3)
+    ads_profile = sort_dict(ads_profile, n_categories)
     print ads_profile
 
     means_ads_profile = ads_profile.values()
     std_ads_profile = ads_profile.keys()
 
-    n_groups = 3
+    n_groups = n_categories
 
     fig, ax = plt.subplots()
 
