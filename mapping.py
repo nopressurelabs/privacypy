@@ -17,7 +17,6 @@ def map_keywords_to_wikipedia_categories(keywords, profile):
                 cats = wikipedia.page(possibility).categories
                 if len(cats) > 0:
                     for cat in cats:
-                        print "asking dmoz for top cat"
                         dmoz = map_keywords_to_dmoz(cat)
                         if len(dmoz) > 0:
                             for dmoz_cat in dmoz:
