@@ -5,27 +5,40 @@ import time
 import operator
 from collections import Counter
 from serpextract import get_parser, extract, is_serp, get_all_query_params
+import requests
+from bs4 import BeautifulSoup
 
 
-def map_keywords_to_wikipedia_categories(keywords):
-    profile = Counter()
+def map_keywords_to_wikipedia_categories(keywords, profile):
     for keyword in keywords:
-        possibilities = wikipedia.search(keyword, results=3, suggestion=False)
+        possibilities = wikipedia.search(keyword, results=5, suggestion=False)
         for possibility in possibilities:
             try:
                 cats = wikipedia.page(possibility).categories
                 if len(cats) > 0:
                     for cat in cats:
-                        try:
-                            profile[cat] += 1
-                        except KeyError, err:
-                            profile[cat] = 1
+                        print "asking dmoz for top cat"
+                        dmoz = map_keywords_to_dmoz(cat)
+                        if len(dmoz) > 0:
+                            for dmoz_cat in dmoz:
+                                try:
+                                    profile[dmoz_cat] += 1
+                                except KeyError, err:
+                                    profile[dmoz_cat] = 1
             except:
                 'Not Found, do nothing'
-    return profile
 
-def map_keywords_to_dmoz(keywords):
-    
+
+def map_keywords_to_dmoz(keyword):
+    dmoz_keywords = list()
+    url = "http://www.dmoz.org/search?q=" + keyword + "&cat=all&type=ont&all=no&start=0"
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text)
+    ol_list = soup.find_all("ol", class_="dir")
+    links = ol_list[0].find_all("li")
+    for link in links:
+        dmoz_keywords.extend([link.a.text.split(':')[0]])
+    return dmoz_keywords
 
 def extract_params_from_url(ads):
     ads_profile = list()
@@ -37,16 +50,10 @@ def extract_params_from_url(ads):
 def sort_dict(x, n):
     return Counter(dict(x.most_common(n)))
 
-def create_bar_chart(profile, ads_profile, n_categories):
-
-    profile = sort_dict(profile, n_categories)
-    print profile
+def create_bar_chart(profile, ads_profile, n_categories, directory):
 
     means_profile = profile.values()
     std_profile = profile.keys()
-
-    ads_profile = sort_dict(ads_profile, n_categories)
-    print ads_profile
 
     means_ads_profile = ads_profile.values()
     std_ads_profile = ads_profile.keys()
@@ -59,26 +66,15 @@ def create_bar_chart(profile, ads_profile, n_categories):
     bar_width = 0.35
 
     opacity = 0.4
-    error_config = {'ecolor': '0.3'}
 
-    rects1 = plt.bar(index, means_profile, bar_width,
-                 alpha=opacity,
-                 color='b',
-                 yerr=std_profile,
-                 error_kw=error_config,
-                 label='User')
+    rects1 = plt.bar(index, means_profile, bar_width, alpha=opacity, color='b', label='User')
 
-    rects2 = plt.bar(index + bar_width, means_ads_profile, bar_width,
-                 alpha=opacity,
-                 color='g',
-                 yerr=std_ads_profile,
-                 error_kw=error_config,
-                 label='Ads')
+    rects2 = plt.bar(index + bar_width, means_ads_profile, bar_width, alpha=opacity, color='g', label='Ads')
+
     plt.xlabel('Profile')
-    plt.ylabel('Abs count')
+    plt.ylabel('Ads count')
     plt.title('Count by user and ads')
     plt.xticks(index + bar_width, (profile.keys()))
     plt.legend()
 
-    plt.tight_layout()
-    plt.savefig(str(time.strftime("%m%d%y%H%M%S", time.localtime())), bbox_inches='tight')
+    plt.savefig(str(directory + "/" + time.strftime("%m%d%y%H%M%S", time.localtime()) + ".png"))

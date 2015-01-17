@@ -40,7 +40,6 @@ def get_top_categories(cats):
         for li in li_list:
             cat = li.a.text[1:-30]
             cats.append(cat)
-    return cats
 
 def get_sub_cats(cat):
     """
