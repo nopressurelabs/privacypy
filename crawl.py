@@ -115,12 +115,12 @@ def links_in_page(page_url,tag):
     parser.close()
     return parser.urls
 
-def save_screenshot(driver,directory):
-    screenshot = directory + "/" + str(time.strftime("%m%d%y%H%M%S", time.localtime())) + ".png"
+def save_screenshot(driver, directory, timestamp):
+    screenshot = directory + "/" + timestamp + "-screenshot.png"
     driver.get_screenshot_as_file(screenshot)
 
-def save_source(driver, directory):
-    source_dir = directory + "/" + str(time.strftime("%m%d%y%H%M%S", time.localtime())) + "-source.log"
+def save_source(driver, directory, timestamp):
+    source_dir = directory + "/" + timestamp + "-source.log"
     f = open(source_dir,'w')
     f.write(driver.page_source.encode('utf-8'))
 
@@ -132,12 +132,11 @@ def update_profiles(driver, profile, ads_profile):
     if len(ads) > 0:
         ads_tags = mapping.extract_params_from_url(ads)
         mapping.map_keywords_to_wikipedia_categories(ads_tags, ads_profile)
-    
 
-def save_screenshot_and_sources(driver, directory):
-    timestamp = str(time.strftime("%m%d%y%H%M%S", time.localtime()))
-    save_screenshot(driver,directory)
-    save_source(driver,directory)
+
+def save_screenshot_and_sources(driver, directory, timestamp):
+    save_screenshot(driver, directory, timestamp)
+    save_source(driver, directory, timestamp)
     save_ads_links(driver, directory, timestamp)
     save_headers(driver, directory, timestamp)
 
@@ -156,6 +155,7 @@ def visit_list(url_list, driver, profile, ads_profile):
     """
         Visit URL list and dump stuff
     """
+    current_time = ""
     current_time = str(time.strftime("%m%d%y%H%M%S", time.localtime()))
     directory = 'session' + str(current_time)
 
@@ -165,15 +165,17 @@ def visit_list(url_list, driver, profile, ads_profile):
 
     for url in url_list:
         time.sleep(randint(5,15))
+        current_time = str(time.strftime("%m%d%y%H%M%S", time.localtime()))
         n = 1 # randint(2,9)
-        visit_link(url, driver, profile, ads_profile, directory)
+        visit_link(url, driver, profile, ads_profile, directory, current_time)
         i=0
         while i < n:
             links = driver.find_elements_by_tag_name('a')
             if links:
                 link = random_elem(links)
                 time.sleep(randint(25,35))
-                visit_link(link.get_attribute("href"), driver, profile, ads_profile, directory)
+                current_time = str(time.strftime("%m%d%y%H%M%S", time.localtime()))
+                visit_link(link.get_attribute("href"), driver, profile, ads_profile, directory, current_time)
                 driver.back() # return to page that has 1,2,3,next -like links
                 time.sleep(randint(5,15))
                 i +=1
@@ -181,8 +183,8 @@ def visit_list(url_list, driver, profile, ads_profile):
                 break
     save_cookies(driver, directory)
 
-def visit_link(url, driver, profile, ads_profile, directory):
+def visit_link(url, driver, profile, ads_profile, directory, timestamp):
     driver.get(url) # load page
-    save_screenshot_and_sources(driver, directory)
+    save_screenshot_and_sources(driver, directory, timestamp)
     update_profiles(driver, profile, ads_profile)
-    mapping.create_bar_chart(profile, ads_profile, 16, directory)
+    mapping.create_bar_chart(profile, ads_profile, 16, directory, timestamp)

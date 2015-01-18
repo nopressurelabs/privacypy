@@ -11,21 +11,24 @@ from bs4 import BeautifulSoup
 
 def map_keywords_to_wikipedia_categories(keywords, profile):
     for keyword in keywords:
-        possibilities = wikipedia.search(keyword, results=5, suggestion=False)
-        for possibility in possibilities:
-            try:
-                cats = wikipedia.page(possibility).categories
-                if len(cats) > 0:
-                    for cat in cats:
-                        dmoz = map_keywords_to_dmoz(cat)
-                        if len(dmoz) > 0:
-                            for dmoz_cat in dmoz:
-                                try:
-                                    profile[dmoz_cat] += 1
-                                except KeyError, err:
-                                    profile[dmoz_cat] = 1
-            except:
-                'Not Found, do nothing'
+        try:
+            possibilities = wikipedia.search(keyword, results=5, suggestion=False)
+            for possibility in possibilities:
+                try:
+                    cats = wikipedia.page(possibility).categories
+                    if len(cats) > 0:
+                        for cat in cats:
+                            dmoz = map_keywords_to_dmoz(cat)
+                            if len(dmoz) > 0:
+                                for dmoz_cat in dmoz:
+                                    try:
+                                        profile[dmoz_cat] += 1
+                                    except KeyError, err:
+                                        profile[dmoz_cat] = 1
+                except:
+                    'Not Found, do nothing'
+        except WikipediaException:
+            'Wikipedia Search Error'
 
 
 def map_keywords_to_dmoz(keyword):
@@ -49,12 +52,24 @@ def extract_params_from_url(ads):
 def sort_dict(x, n):
     return Counter(dict(x.most_common(n)))
 
-def create_bar_chart(profile, ads_profile, n_categories, directory):
+def calculate_relative_profile(profile):
+    rel_profile = profile.values()
+    new_profile = dict()
+    rel_sum = sum(rel_profile)
+    if rel_sum > 0:
+        for item in profile.items():
+            new_profile[item[0]] = float(float(item[1])/float(rel_sum))
+    else:
+        new_profile = profile
+    return new_profile
 
-    means_profile = profile.values()
+
+def create_bar_chart(profile, ads_profile, n_categories, directory, timestamp):
+
+    means_profile = calculate_relative_profile(profile).values()
     std_profile = profile.keys()
 
-    means_ads_profile = ads_profile.values()
+    means_ads_profile = calculate_relative_profile(ads_profile).values()
     std_ads_profile = ads_profile.keys()
 
     n_groups = n_categories
@@ -71,9 +86,9 @@ def create_bar_chart(profile, ads_profile, n_categories, directory):
     rects2 = plt.bar(index + bar_width, means_ads_profile, bar_width, alpha=opacity, color='g', label='Ads')
 
     plt.xlabel('Profile')
-    plt.ylabel('Ads count')
+    plt.ylabel('Keywords count')
     plt.title('Count by user and ads')
-    plt.xticks(index + bar_width, (profile.keys()))
+    plt.xticks(index + bar_width, (profile.keys()), rotation=50)
     plt.legend()
 
-    plt.savefig(str(directory + "/" + time.strftime("%m%d%y%H%M%S", time.localtime()) + ".png"))
+    plt.savefig(str(directory + "/" + timestamp + "-barchart.png"))
